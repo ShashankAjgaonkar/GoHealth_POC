@@ -56,14 +56,6 @@ jobs:
           echo "Step 1: Installing schemachange"
           pip install schemachange==3.7.0
 
-          echo "Printing secrets"
-          echo $SF_ACCOUNT 
-          echo $SF_USERNAME
-          echo $SF_ROLE 
-          echo $SF_WAREHOUSE 
-          echo $SF_DATABASE 
-          echo $SNOWFLAKE_PASSWORD 
-
           echo "Step 2: Running schemachange"
 
           schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE_DEV.CHANGE_HISTORY --create-change-history-table
@@ -85,15 +77,6 @@ jobs:
           python --version
           echo "Step 1: Installing schemachange"
           pip install schemachange==3.7.0
-
-          echo "Printing secrets"
-          echo $SF_ACCOUNT 
-          echo $SF_USERNAME
-          echo $SF_ROLE 
-          echo $SF_WAREHOUSE 
-          echo $SF_DATABASE 
-          echo $SNOWFLAKE_PASSWORD
-          echo "Step 2: Running schemachange"
       
           schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE_QA.CHANGE_HISTORY --create-change-history-table
 
@@ -119,16 +102,7 @@ jobs:
       
           echo "Step 1: Installing schemachange"
 
-          pip install schemachange==3.7.0   
-
-
-          echo "Printing secrets"
-          echo $SF_ACCOUNT | sed 's/./& /g'
-          echo $SF_USERNAME | sed 's/./& /g'
-          echo $SF_ROLE | sed 's/./& /g'
-          echo $SF_WAREHOUSE | sed 's/./& /g'
-          echo $SF_DATABASE | sed 's/./& /g'
-          echo $SNOWFLAKE_PASSWORD | sed 's/./& /g'
+          pip install schemachange==3.7.0
           
           echo "Step 2: Running schemachange"
 
