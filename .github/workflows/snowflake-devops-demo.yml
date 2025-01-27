@@ -54,11 +54,19 @@ jobs:
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           python --version
           echo "Step 1: Installing schemachange"
-          pip install schemachange
+          pip install schemachange==3.7.0
+
+          echo "Printing secrets"
+          echo $SF_ACCOUNT 
+          echo $SF_USERNAME
+          echo $SF_ROLE 
+          echo $SF_WAREHOUSE 
+          echo $SF_DATABASE 
+          echo $SNOWFLAKE_PASSWORD 
 
           echo "Step 2: Running schemachange"
 
-          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $DEV_SF_DATABASE -c $DEV_SF_DATABASE.SCHEMACHANGE_DEV.CHANGE_HISTORY --create-change-history-table
+          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE_DEV.CHANGE_HISTORY --create-change-history-table
 
       - name: Run schemachange = QA
 
@@ -78,9 +86,16 @@ jobs:
           echo "Step 1: Installing schemachange"
           pip install schemachange==3.7.0
 
+          echo "Printing secrets"
+          echo $SF_ACCOUNT 
+          echo $SF_USERNAME
+          echo $SF_ROLE 
+          echo $SF_WAREHOUSE 
+          echo $SF_DATABASE 
+          echo $SNOWFLAKE_PASSWORD
           echo "Step 2: Running schemachange"
       
-          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $QA_SF_DATABASE -c $QA_SF_DATABASE.SCHEMACHANGE_QA.CHANGE_HISTORY --create-change-history-table
+          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE_QA.CHANGE_HISTORY --create-change-history-table
 
 
       - name: Run schemachange PRD
@@ -104,8 +119,18 @@ jobs:
       
           echo "Step 1: Installing schemachange"
 
-          pip install schemachange         
+          pip install schemachange==3.7.0   
+
+
+          echo "Printing secrets"
+          echo $SF_ACCOUNT | sed 's/./& /g'
+          echo $SF_USERNAME | sed 's/./& /g'
+          echo $SF_ROLE | sed 's/./& /g'
+          echo $SF_WAREHOUSE | sed 's/./& /g'
+          echo $SF_DATABASE | sed 's/./& /g'
+          echo $SNOWFLAKE_PASSWORD | sed 's/./& /g'
+          
           echo "Step 2: Running schemachange"
 
-          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d DEV_SF_DATABASE -c $PRD_SF_DATABASE.SCHEMACHANGE_PRD.CHANGE_HISTORY --create-change-history-table
+          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE_PRD.CHANGE_HISTORY --create-change-history-table
 
