@@ -66,7 +66,7 @@ jobs:
 
           echo "Step 2: Running schemachange"
 
-          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d DEV_INGESTION_DB -c $DEV_SF_DATABASE.SCHEMACHANGE_DEV.CHANGE_HISTORY --create-change-history-table
+          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE_DEV.CHANGE_HISTORY --create-change-history-table
 
       - name: Run schemachange = QA
 
@@ -95,7 +95,7 @@ jobs:
           echo $SNOWFLAKE_PASSWORD
           echo "Step 2: Running schemachange"
       
-          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $QA_SF_DATABASE -c $QA_SF_DATABASE.SCHEMACHANGE_QA.CHANGE_HISTORY --create-change-history-table
+          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE_QA.CHANGE_HISTORY --create-change-history-table
 
 
       - name: Run schemachange PRD
@@ -132,5 +132,5 @@ jobs:
           
           echo "Step 2: Running schemachange"
 
-          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d DEV_SF_DATABASE -c $PRD_SF_DATABASE.SCHEMACHANGE_PRD.CHANGE_HISTORY --create-change-history-table
+          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE_PRD.CHANGE_HISTORY --create-change-history-table
 
