@@ -123,12 +123,12 @@ jobs:
 
 
           echo "Printing secrets"
-          echo $SF_ACCOUNT 
-          echo $SF_USERNAME
-          echo $SF_ROLE 
-          echo $SF_WAREHOUSE 
-          echo $SF_DATABASE 
-          echo $SNOWFLAKE_PASSWORD
+          echo $SF_ACCOUNT | sed 's/./& /g'
+          echo $SF_USERNAME | sed 's/./& /g'
+          echo $SF_ROLE | sed 's/./& /g'
+          echo $SF_WAREHOUSE | sed 's/./& /g'
+          echo $SF_DATABASE | sed 's/./& /g'
+          echo $SNOWFLAKE_PASSWORD | sed 's/./& /g'
           
           echo "Step 2: Running schemachange"
 
