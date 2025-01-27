@@ -86,6 +86,13 @@ jobs:
           echo "Step 1: Installing schemachange"
           pip install schemachange==3.7.0
 
+          echo "Printing secrets"
+          echo $SF_ACCOUNT 
+          echo $SF_USERNAME
+          echo $SF_ROLE 
+          echo $SF_WAREHOUSE 
+          echo $SF_DATABASE 
+          echo $SNOWFLAKE_PASSWORD
           echo "Step 2: Running schemachange"
       
           schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $QA_SF_DATABASE -c $QA_SF_DATABASE.SCHEMACHANGE_QA.CHANGE_HISTORY --create-change-history-table
@@ -113,6 +120,16 @@ jobs:
           echo "Step 1: Installing schemachange"
 
           pip install schemachange==3.7.0   
+
+
+          echo "Printing secrets"
+          echo $SF_ACCOUNT 
+          echo $SF_USERNAME
+          echo $SF_ROLE 
+          echo $SF_WAREHOUSE 
+          echo $SF_DATABASE 
+          echo $SNOWFLAKE_PASSWORD
+          
           echo "Step 2: Running schemachange"
 
           schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d DEV_SF_DATABASE -c $PRD_SF_DATABASE.SCHEMACHANGE_PRD.CHANGE_HISTORY --create-change-history-table
